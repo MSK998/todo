@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO</title>
+
+    <link rel="stylesheet" href="./index.css">
+
+    <script defer src="https://unpkg.com/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <h1>TODO</h1>
+    </div>
+
+    <div class="base-grid" x-data="{ todos: $persist([]) }">
+        <div class="main">
+            <div class="list" x-show="todos.length">
+                <template x-for="(todo, index) in todos">
+                    <ul>
+                        <li class="entry">
+                            <span>
+                                <span x-text="todo.todo" class="todo-text" :id="todo.done ? 'done' : ''"></span>
+                                <span class="button-panel">
+                                    <button class="action-button" @click="todo.done = true" x-show="!todo.done">
+                                        <img src="./assets/done_black_24dp.svg" alt="Done" id="svg">
+                                    </button>
+                                    <button class="action-button" @click="todos.splice(index, 1)">
+                                        <img src="./assets/clear_black_24dp.svg" alt="Delete" id="svg">
+                                    </button>
+                                </span>
+                            </span>
+                        </li>
+                    </ul>
+                </template>
+            </div>
+            <div class="clear" x-show="todos.length">
+                <button id="clear-button" @click="todos = []">Clear All</button>
+            </div>
+            <div class="input">
+                <input 
+                    type="text" 
+                    name="todo" 
+                    id="todo-input" 
+                    placeholder="Enter a task here..."
+                    @keyup.enter="
+                        if($event.target.value.length){
+                            todos.push({
+                                todo: $event.target.value,
+                                done: false
+                            })
+                            $event.target.value = ''
+                        }
+                        "
+                    required>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
