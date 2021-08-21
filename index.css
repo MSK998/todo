@@ -36,7 +36,7 @@ li {
 }
 
 .list {
-    border: 0.2rem solid #333;
+    border: 0.2rem solid #eee;
     border-radius: 1rem;
 }
 
@@ -58,6 +58,7 @@ li {
     font-family: 'Inconsolata', monospace;
     border: none;
     border-radius: 0.5rem;
+    background-color: #ddd;
 }
 
 #svg {
@@ -81,6 +82,7 @@ li {
 }
 
 .clear {
+    margin: 0.5rem;
     text-align: center;
 }
 
